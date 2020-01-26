@@ -5,6 +5,15 @@ const Button = props => {
   return <button onClick={props.handleClick}>{props.text}</button>
 }
 
+const Anecdote = props => {
+  return (
+    <div>
+      <p>{props.anecdote}</p>
+      <p>has {props.numberOfVotes} votes</p>
+    </div>
+  )
+}
+
 const App = props => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(
@@ -23,13 +32,26 @@ const App = props => {
     setVotes(newVotes)
   }
 
+  let max = Math.max(...votes)
+  let maxIndex = votes.indexOf(max)
+
   return (
     <div>
-      <p>{props.anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
+      <h2>Anecdote of the day</h2>
+      <Anecdote
+        anecdote={props.anecdotes[selected]}
+        numberOfVotes={votes[selected]}
+      />
       <div>
         <Button text="vote" handleClick={handleVote} />
         <Button text="get next anecdote" handleClick={getNextAnecdote} />
+      </div>
+      <div>
+        <h2>Anecdote with most votes</h2>
+        <Anecdote
+          anecdote={props.anecdotes[maxIndex]}
+          numberOfVotes={max}
+        />
       </div>
     </div>
   )
