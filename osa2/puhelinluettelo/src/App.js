@@ -35,9 +35,13 @@ const App = () => {
         })
         .catch(function(error) {
           setError(true)
-          setNotification(
-            `An error occurred while attempting to create ${newName}`
-          )
+          if (error.response.data) {
+            setNotification(error.response.data.error)
+          } else {
+            setNotification(
+              `An error occurred while attempting to create ${newName}`
+            )
+          }
         })
         .then(function() {
           setNewName("")
@@ -72,9 +76,13 @@ const App = () => {
       })
       .catch(function(error) {
         setError(true)
-        setNotification(
-          `An error occurred while attempting to update ${modifiedPerson.name}`
-        )
+        if (error.response.data) {
+          setNotification(error.response.data.error)
+        } else {
+          setNotification(
+            `An error occurred while attempting to update ${modifiedPerson.name}`
+          )
+        }
       })
       .then(function() {
         setNewName("")
