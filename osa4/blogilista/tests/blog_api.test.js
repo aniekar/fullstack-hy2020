@@ -4,6 +4,7 @@ const app = require('../app')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 const initialBlogs = [
 	{
@@ -33,8 +34,23 @@ const initialBlogs = [
 	},
 ]
 
+const testUser = {
+	_id: '5e48077704cdf42e6f314197',
+	users: [],
+	username: 'testi123',
+	name: 'Tarja Halonen',
+	passwordHash:
+		'$2b$10$DWzqW9MXD0ObONajgegJm.i3OnG.irj/ojmAXFLOznzPCH.ffbso123',
+	__v: 0,
+}
+
 beforeEach(async () => {
 	await Blog.deleteMany({})
+
+	await User.deleteMany({})
+
+	let userObject = new User(testUser)
+	await userObject.save()
 
 	let blogObject = new Blog(initialBlogs[0])
 	await blogObject.save()
@@ -63,7 +79,7 @@ describe('GET-request tests', () => {
 describe('id is formatted correctly', () => {
 	test('id is defined', async () => {
 		const response = await api.get('/api/blogs')
-        const individualBlog = response.body[0]
+		const individualBlog = response.body[0]
 		expect(individualBlog.id).toBeDefined()
 	})
 })
