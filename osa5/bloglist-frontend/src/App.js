@@ -98,15 +98,15 @@ const App = () => {
   }
 
   const loginForm = () => (
-    <Togglable buttonLabel="Show login form">
-      <LoginForm
-        handleLogin={handleLogin}
-        handleUsernameChange={({ target }) => setUsername(target.value)}
-        handlePasswordChange={({ target }) => setPassword(target.value)}
-        username={username}
-        password={password}
-      />
-    </Togglable>
+    // <Togglable buttonLabel="Show login form">
+    <LoginForm
+      handleLogin={handleLogin}
+      handleUsernameChange={({ target }) => setUsername(target.value)}
+      handlePasswordChange={({ target }) => setPassword(target.value)}
+      username={username}
+      password={password}
+    />
+    //</Togglable>
   )
 
   const blogForm = () => (
@@ -117,6 +117,7 @@ const App = () => {
 
   return (
     <div>
+      <Notification message={notification} error={isError} />
       {user === null ? (
         loginForm()
       ) : (
@@ -125,7 +126,6 @@ const App = () => {
             {user.name} logged in <button onClick={handleLogout}>logout</button>
           </p>
           <h2>Blogs</h2>
-          <Notification message={notification} error={isError} />
           {blogs.map(blog => (
             <Blog
               key={blog.id}

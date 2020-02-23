@@ -22,7 +22,7 @@ const Notification = ({ message, error }) => {
     return null
   } else {
     styleType = error ? errorStyle : regularStyle
-    return <div style={styleType}>{message}</div>
+    return <div id="notification" style={styleType}>{message}</div>
   }
 }
 
