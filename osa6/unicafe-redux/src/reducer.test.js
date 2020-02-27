@@ -11,7 +11,7 @@ describe('unicafe reducer', () => {
   test('should return a proper initial state when called with undefined state', () => {
     const state = {}
     const action = {
-      type: 'DO_NOTHING',
+      type: 'DO_NOTHING'
     }
 
     const newState = counterReducer(undefined, action)
@@ -20,7 +20,7 @@ describe('unicafe reducer', () => {
 
   test('good is incremented', () => {
     const action = {
-      type: 'GOOD',
+      type: 'GOOD'
     }
     const state = initialState
 
@@ -35,7 +35,7 @@ describe('unicafe reducer', () => {
 
   test('ok is incremented', () => {
     const action = {
-      type: 'OK',
+      type: 'OK'
     }
     const state = initialState
 
@@ -50,7 +50,7 @@ describe('unicafe reducer', () => {
 
   test('bad is incremented', () => {
     const action = {
-      type: 'BAD',
+      type: 'BAD'
     }
     const state = initialState
 
@@ -65,10 +65,10 @@ describe('unicafe reducer', () => {
 
   test('zero resets to initial state', () => {
     const goodAction = {
-      type: 'GOOD',
+      type: 'GOOD'
     }
     const zeroAction = {
-      type: 'ZERO',
+      type: 'ZERO'
     }
     const state = initialState
 
