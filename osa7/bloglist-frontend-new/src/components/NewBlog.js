@@ -1,4 +1,16 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
+import Button from './Button'
+import Header from './Header'
+import Input from './Input'
+
+const NewBlogContainer = styled.div`
+margin: 0.25em;
+padding: 0.25em;
+background: Bisque;
+border: 1px solid Thistle;
+font-family: Arial;
+`
 
 const NewBlog = (props) => {
   const [title, setTitle] = useState('')
@@ -19,34 +31,33 @@ const NewBlog = (props) => {
 
   return (
     <div>
-      <h2>create new</h2>
+      <Header>Create new</Header>
+      <NewBlogContainer>
       <form onSubmit={handleNewBlog}>
         <div>
-          author
-          <input
+          <Input
             id='author'
             value={author}
             onChange={({ target }) => setAuthor(target.value)}
           />
         </div>
         <div>
-          title
-          <input
+          <Input
             id='title'
             value={title}
             onChange={({ target }) => setTitle(target.value)}
           />
         </div>
         <div>
-          url
-          <input
+          <Input
             id='url'
             value={url}
             onChange={({ target }) => setUrl(target.value)}
           />
         </div>
-        <button id="create">create</button>
+        <Button id="create">create</Button>
       </form>
+      </NewBlogContainer>
     </div>
   )
 }

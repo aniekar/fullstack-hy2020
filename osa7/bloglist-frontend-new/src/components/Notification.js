@@ -10,8 +10,8 @@ const Notification = () => {
     borderRadius: 5,
     padding: 10,
     margin: 5,
-    color: notification.success === true ? 'green' : 'red',
-    background: 'bisque'
+    color: notification.success === true ? 'MediumSlateBlue' : 'red',
+    background: 'LavenderBlush'
   }
 
   const invisibleStyle = {
