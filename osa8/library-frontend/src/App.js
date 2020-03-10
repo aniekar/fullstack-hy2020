@@ -3,31 +3,16 @@ import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 
-import { gql, useQuery, useLazyQuery } from '@apollo/client'
+import { useQuery, useLazyQuery } from '@apollo/client'
+import { ALL_AUTHORS, ALL_BOOKS } from './queries'
 
-const ALL_AUTHORS = gql`
-  query {
-    allAuthors {
-      name
-      born
-      bookCount
-    }
-  }
-`
 
-const ALL_BOOKS = gql`
-  query allBooks($author: String, $genre: String) {
-    allBooks(author: $author, genre: $genre) {
-      title
-      author
-      published
-    }
-  }
-`
 
 const App = () => {
   const [page, setPage] = useState('authors')
-  const authors = useQuery(ALL_AUTHORS)
+  const authors = useQuery(ALL_AUTHORS, {
+    pollInterval: 3000
+  })
   const [getBooks, booksResult] = useLazyQuery(ALL_BOOKS)
   const [books, setBooks] = useState([])
 
