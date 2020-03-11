@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { EDIT_AUTHOR } from '../queries'
+import Select from 'react-select'
 
 const Authors = props => {
   const authors = props.authors
   const [name, setName] = useState('')
-  const [birthYear, setBirthYear] = useState(null)
+  const [birthYear, setBirthYear] = useState('')
   const [editAuthor] = useMutation(EDIT_AUTHOR)
+  const authorNames = props.authors.map(a => ({ value: a.name, label: a.name }))
+  console.log(authorNames)
 
   if (!props.show) {
     return null
@@ -44,9 +47,11 @@ const Authors = props => {
       <form onSubmit={submit}>
         <div>
           name
-          <input
-            value={name}
-            onChange={({ target }) => setName(target.value)}
+          <Select
+            value={{value: name, label: name}}
+            //inputValue={name}
+            options={authorNames}
+            onChange={value => setName(value.value)}
           />
         </div>
         <div>
