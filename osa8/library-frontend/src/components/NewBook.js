@@ -16,9 +16,9 @@ const NewBook = props => {
 
   const submit = async event => {
     event.preventDefault()
-    
+
     let published = parseInt(year)
-    addBook({  variables: { title, author, published, genres } })
+    addBook({ variables: { title, author, published, genres } })
 
     setTitle('')
     setYear('')

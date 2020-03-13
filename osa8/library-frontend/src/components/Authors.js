@@ -8,11 +8,20 @@ const Authors = props => {
   const [name, setName] = useState('')
   const [birthYear, setBirthYear] = useState('')
   const [editAuthor] = useMutation(EDIT_AUTHOR)
-  const authorNames = props.authors.map(a => ({ value: a.name, label: a.name }))
-  console.log(authorNames)
+  let authorNames = []
+  let authorList = []
+  //props.authors.map(a => ({ value: a.name, label: a.name }))
 
   if (!props.show) {
     return null
+  }
+
+  if (props.authors.data) {
+    authorNames = props.authors.data.allAuthors.map(a => ({
+      value: a.name,
+      label: a.name
+    }))
+    authorList = props.authors.data.allAuthors
   }
 
   const submit = async event => {
@@ -34,7 +43,7 @@ const Authors = props => {
             <th>born</th>
             <th>books</th>
           </tr>
-          {authors.map(a => (
+          {authorList.map(a => (
             <tr key={a.name}>
               <td>{a.name}</td>
               <td>{a.born}</td>
@@ -48,7 +57,7 @@ const Authors = props => {
         <div>
           name
           <Select
-            value={{value: name, label: name}}
+            value={{ value: name, label: name }}
             //inputValue={name}
             options={authorNames}
             onChange={value => setName(value.value)}
