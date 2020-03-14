@@ -5,6 +5,7 @@ import NewBook from './components/NewBook'
 import Login from './components/Login'
 import { useQuery, useMutation, useApolloClient } from '@apollo/client'
 import { ALL_AUTHORS, LOGIN } from './queries'
+import Recommendations from './components/Recommendations'
 
 const App = () => {
   const client = useApolloClient()
@@ -49,12 +50,15 @@ const App = () => {
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
         {token && <button onClick={() => setPage('add')}>add book</button>}
+        {token && <button onClick={() => setPage('recommendations')}>recommendations
+</button>}
         {token && <button onClick={handleLogout}>logout</button>}
         {!token && <button onClick={() => setPage('login')}>login</button>}
       </div>
       <Authors show={page === 'authors'} authors={authors} />
       <Books show={page === 'books'} />
       <NewBook show={page === 'add'} />
+      <Recommendations show={page === 'recommendations'} />
       <Login show={page === 'login'} handleLogin={handleLogin} />
     </div>
   )
