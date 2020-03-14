@@ -58,7 +58,6 @@ const Authors = props => {
           name
           <Select
             value={{ value: name, label: name }}
-            //inputValue={name}
             options={authorNames}
             onChange={value => setName(value.value)}
           />
