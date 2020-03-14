@@ -3,8 +3,13 @@ import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 import Login from './components/Login'
-import { useQuery, useMutation, useApolloClient } from '@apollo/client'
-import { ALL_AUTHORS, LOGIN } from './queries'
+import {
+  useQuery,
+  useMutation,
+  useApolloClient,
+  useSubscription
+} from '@apollo/client'
+import { ALL_AUTHORS, LOGIN, BOOK_ADDED } from './queries'
 import Recommendations from './components/Recommendations'
 
 const App = () => {
@@ -19,6 +24,12 @@ const App = () => {
   })
   const authors = useQuery(ALL_AUTHORS, {
     pollInterval: 3000
+  })
+
+  useSubscription(BOOK_ADDED, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      window.alert(`New book added: ${subscriptionData.data.bookAdded.title}`)
+    }
   })
 
   useEffect(() => {
@@ -50,8 +61,11 @@ const App = () => {
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
         {token && <button onClick={() => setPage('add')}>add book</button>}
-        {token && <button onClick={() => setPage('recommendations')}>recommendations
-</button>}
+        {token && (
+          <button onClick={() => setPage('recommendations')}>
+            recommendations
+          </button>
+        )}
         {token && <button onClick={handleLogout}>logout</button>}
         {!token && <button onClick={() => setPage('login')}>login</button>}
       </div>
